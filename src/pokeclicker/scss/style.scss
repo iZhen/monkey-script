@@ -1,0 +1,111 @@
+@import './variables.scss';
+@import './reset.scss';
+
+// styles
+
+html, body {
+  font-family: $base-font-family !important;
+  font-size: $base-font-size !important;
+}
+
+body {
+  padding: $status-bar-height + 10px 0 0;
+  background: $background-color !important;
+
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: $status-bar-height;
+    background-color: $status-bar-background ;
+  }
+}
+
+// show auto restart
+.btn-gym-auto-restart {
+  display: block !important;
+}
+
+.modal-header .btn-info {
+  height: auto !important;
+}
+
+.battle-view {
+  .pageItemTitle {
+    font-size: 1.3rem !important;
+
+    .right, .left {
+      top: 2px;
+      font-size: $base-font-size;
+    }
+    .pokeball-smallest {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .progress.hitpoints {
+    left: 0;
+    width: 100%;
+  }
+}
+
+//=== currency content ===========================
+#battleContainer {
+  & > .card-header {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 900px;
+    border: 0;
+
+    tbody, tr, td, td > span {
+      display: flex !important;
+      align-items: center;
+      flex: 1;
+    }
+
+    tr, td {
+      margin: 0;
+      padding: 0;
+    }
+
+    td > span {
+      width: 150px;
+      padding: 0 10px;
+      font-size: 12px;
+
+      img { height: 18px; margin-right: 3px;}
+      span { line-height: $status-bar-height; }
+    }
+  }
+}
+
+//=== start menu ===========================
+
+#startMenu {
+  top: 0 !important;
+  right: 0 !important;
+  position: fixed !important;
+
+  .btn, a { font-size: 12px !important; }
+  .btn {
+    padding: 0 10px;
+    line-height: $status-bar-height;
+
+    &:after { display: none; }
+  }
+  a { line-height: 1.5; }
+}
+
+//=== item ===========================
+#evoStones .row .col-2 {
+  display: flex;
+  align-items: center;
+}
