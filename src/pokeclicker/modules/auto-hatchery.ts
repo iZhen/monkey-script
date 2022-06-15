@@ -1,6 +1,6 @@
 const namespace = 'auto-hatchery';
 
-enum SortOrder { DESC, ASC };
+enum SortOrder { ASC, DESC };
 
 const auto_status = {
   timer: 0,
@@ -34,8 +34,16 @@ function addToHatchery() {
   }
 }
 
+function clearTimer() {
+  if (auto_status.timer) {
+    clearTimeout(auto_status.timer);
+    auto_status.timer = 0;
+  }
+}
+
 function autoHatch() {
   if (auto_status.enable) {
+    clearTimer();
     try {
       hatchEgg();
       addToHatchery();
@@ -52,19 +60,22 @@ function renderControl() {
     if (breedingModal) {
       const items = [];
       Object.entries(SortOptionConfigs || []).forEach(([key, { text }]) => {
-        items.push(`<a class="dropdown-item" data-key="sortKey" data-value="${key}">${text}</a>`);
+        items.push(
+          `<a class="dropdown-item ${Number(key) === auto_status.sortKey ? 'active' : ''}" data-key="sortKey" data-value="${key}">${text}</a>`
+        );
       });
       items.push(
         '<div class="dropdown-divider"></div>',
-        '<a class="dropdown-item" data-key="sortOrder" data-value="1">ASC</a>',
-        '<a class="dropdown-item" data-key="sortOrder" data-value="0">DESC</a>',
+        `<a class="dropdown-item" data-key="sortOrder" data-value="${SortOrder.ASC}">ASC</a>`,
+        `<a class="dropdown-item" data-key="sortOrder" data-value="${SortOrder.DESC}">DESC</a>`,
       );
 
       ctrl = document.createElement('div');
       ctrl.id = namespace;
       ctrl.classList.add('btn-group');
+      ctrl.style.marginLeft = '25px';
       ctrl.innerHTML = [
-        '<button type="button" class="btn btn-danger btn-switch"></button>',
+        '<button type="button" class="btn btn-danger btn-switch">auto</button>',
         `<button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>`,
         `<div class="dropdown-menu">${items.join('')}</div>`,
       ].join('');
@@ -80,12 +91,7 @@ function renderControl() {
             nextEl.classList.toggle('btn-success');
 
             auto_status.enable = !auto_status.enable ? 1 : 0;
-
-            if (auto_status.timer) {
-              clearTimeout(auto_status.timer);
-              auto_status.timer = 0;
-            }
-
+            clearTimer();
             if (auto_status.enable) {
               autoHatch();
             }
