@@ -12,7 +12,7 @@ config.forEach(async ({
     outfile,
     bundle: true,
     platform: 'browser',
-    target: 'esnext',
+    target: 'es6',
     treeShaking: true,
     minify: false,
     legalComments: 'none',

@@ -11,10 +11,13 @@
 
 import waitForLoad from './modules/wait-for-load';
 import noCatchDelay from './modules/no-catch-delay';
+import autoBattle from './modules/auto-battle';
+import autoHatchery from './modules/auto-hatchery';
 import autoMine from './modules/auto-mine';
 
 waitForLoad().then(() => {
   noCatchDelay();
-
+  autoBattle();
+  autoHatchery();
   autoMine();
 });

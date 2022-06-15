@@ -1,4 +1,4 @@
-function waitForLoad() {
+export default function waitForLoad() {
   return new Promise<void>((reslove) => {
     const timer = setInterval(function() {
       if (!document.getElementById('game')?.classList.contains('loading')) {
@@ -9,5 +9,3 @@ function waitForLoad() {
     }, 1000);
   });
 }
-
-export default waitForLoad;

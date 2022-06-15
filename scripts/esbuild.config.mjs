@@ -1,9 +1,10 @@
-import { resolve, dirname, parse } from 'path';
+import { resolve, dirname } from 'path';
+import { platform } from 'os';
 import { globby } from 'globby';
 
 const rootDir = process.cwd();
-const srcDir = resolve(process.cwd(), 'src');
-const distDir = resolve(process.cwd(), 'dist');
+const srcDir = resolve(rootDir, 'src');
+const distDir = resolve(rootDir, 'dist');
 
 const configPaths = await globby([
   '**/script.config.js',
@@ -14,7 +15,7 @@ const configPaths = await globby([
 const config = await Promise.all(configPaths.map(async (configPath) => {
   const module = dirname(configPath);
   const [scriptConfig, entryFiles] = await Promise.all([
-    import(resolve(srcDir, configPath)),
+    import(`${platform() === 'win32' ? '/' : ''}${resolve(srcDir, configPath)}`),
     globby(`${module}/index.{ts,tsx}`, {
       cwd: srcDir,
     }),

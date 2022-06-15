@@ -1,3 +1,7 @@
+const namespace = 'auto-mine';
+const timer = {
+  bombLoop: 0,
+};
 
 function useBomb() {
   const under = App.game.underground;
@@ -14,7 +18,7 @@ function useBomb() {
 }
 
 export default function autoMine() {
-  var bombLoop = setInterval(function () {
+  timer.bombLoop = setInterval(function () {
     useBomb();
   }, 10000); // Every 10 seconds
 }
