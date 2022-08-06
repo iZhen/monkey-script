@@ -2,10 +2,15 @@ const namespace = 'auto-hatchery';
 
 enum SortOrder { ASC, DESC };
 
+enum StatusClass {
+  Enable = 'btn-success',
+  Disable = 'btn-danger',
+};
+
 const auto_status = {
   timer: 0,
-  enable: 0,
-  sortKey: 0,
+  enable: 1,
+  sortKey: 4,
   sortOrder: SortOrder.ASC,
 };
 
@@ -48,7 +53,7 @@ function autoHatch() {
       hatchEgg();
       addToHatchery();
     } catch(ex) {}
-    auto_status.timer = setTimeout(autoHatch, 3000);
+    auto_status.timer = setTimeout(autoHatch, 5000);
   }
 }
 
@@ -60,13 +65,14 @@ function renderControl() {
     if (breedingModal) {
       const items = [];
       Object.entries(SortOptionConfigs || []).forEach(([key, { text }]) => {
+        const active = Number(key) === auto_status.sortKey ? 'active' : '';
         items.push(
-          `<a class="dropdown-item ${Number(key) === auto_status.sortKey ? 'active' : ''}" data-key="sortKey" data-value="${key}">${text}</a>`
+          `<a class="dropdown-item ${active}" data-key="sortKey" data-value="${key}">${text}</a>`
         );
       });
       items.push(
-        '<div class="dropdown-divider"></div>',
-        `<a class="dropdown-item" data-key="sortOrder" data-value="${SortOrder.ASC}">ASC</a>`,
+        `<div class="dropdown-divider"></div>`,
+        `<a class="dropdown-item active" data-key="sortOrder" data-value="${SortOrder.ASC}">ASC</a>`,
         `<a class="dropdown-item" data-key="sortOrder" data-value="${SortOrder.DESC}">DESC</a>`,
       );
 
@@ -75,20 +81,20 @@ function renderControl() {
       ctrl.classList.add('btn-group');
       ctrl.style.marginLeft = '25px';
       ctrl.innerHTML = [
-        '<button type="button" class="btn btn-danger btn-switch">auto</button>',
-        `<button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>`,
+        `<button type="button" class="btn ${StatusClass.Enable} btn-switch">auto</button>`,
+        `<button type="button" class="btn ${StatusClass.Enable} dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>`,
         `<div class="dropdown-menu">${items.join('')}</div>`,
       ].join('');
       ctrl.addEventListener('click', (e) => {
         const el = e.target;
         if (el instanceof HTMLElement) {
           if (el.matches('.btn-switch')) {
-            el.classList.toggle('btn-danger');
-            el.classList.toggle('btn-success');
+            el.classList.toggle(StatusClass.Enable);
+            el.classList.toggle(StatusClass.Disable);
 
             const nextEl = el.nextSibling as HTMLElement;
-            nextEl.classList.toggle('btn-danger');
-            nextEl.classList.toggle('btn-success');
+            nextEl.classList.toggle(StatusClass.Disable);
+            nextEl.classList.toggle(StatusClass.Enable);
 
             auto_status.enable = !auto_status.enable ? 1 : 0;
             clearTimer();
@@ -114,4 +120,5 @@ function renderControl() {
 
 export default function autoHatchery() {
   renderControl();
+  autoHatch();
 }

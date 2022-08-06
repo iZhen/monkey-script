@@ -18,13 +18,12 @@ paths.forEach((path) => {
   const { dir } = parse(path);
   const [moduleName] = dir.split('/');
   const result = sass.compile(resolve(srcDir, path))
-  const traget = `${moduleName}/${moduleName}.css`;
-
+  const traget = resolve(distDir, `${moduleName}/${moduleName}.css`);
   fs.outputFile(
-    resolve(distDir, traget),
+    traget,
     result.css,
     { encoding: 'utf-8' },
-    () => { console.log(traget); },
+    () => { console.log(`[style] ${traget}`); },
   );
 });
 

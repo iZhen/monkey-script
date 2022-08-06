@@ -19,7 +19,7 @@ config.forEach(async ({
   });
 
   if (buildResult.errors.length === 0) {
-    console.log(`[build] ${outfile}`);
+    console.log(`[script] ${outfile}`);
   }
 });
 
