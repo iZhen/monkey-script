@@ -66,7 +66,7 @@ function autoHatch() {
       hatchEgg();
       addToHatchery();
     } catch(ex) {}
-    AUTO_STATUS.timer = setTimeout(autoHatch, 5000);
+    AUTO_STATUS.timer = setTimeout(autoHatch, 1500);
   }
 }
 
@@ -133,7 +133,7 @@ function renderControl() {
         }
       });
 
-      breedingModal.querySelector('.modal-header')?.appendChild(ctrl);
+      breedingModal.querySelector('.modal-header .float-left')?.appendChild(ctrl);
     }
   }
 }

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development node scripts/dev.mjs",
-    "build": "rm -rf dist && NODE_ENV=production node scripts/build.mjs && node scripts/style.mjs",
+    "build": "rm -rf dist && node scripts/build.mjs && node scripts/style.mjs",
     "style": "node scripts/style.mjs"
   },
   "dependencies": {
