@@ -2,6 +2,7 @@ import { resolve, dirname, parse } from 'path';
 import fs from 'fs-extra';
 import { globby } from 'globby';
 import sass from 'sass';
+import chalk from 'chalk';
 
 const rootDir = process.cwd();
 const srcDir = resolve(process.cwd(), 'src');
@@ -23,7 +24,7 @@ paths.forEach((path) => {
     traget,
     result.css,
     { encoding: 'utf-8' },
-    () => { console.log(`[style] ${traget}`); },
+    () => { console.log(`[${chalk.magenta('style')}] ${traget}`); },
   );
 });
 

@@ -1,14 +1,3 @@
-// ==UserScript==
-// @name         Pokéclicker
-// @namespace    http://tampermonkey.net/
-// @version      0.6
-// @description  Pokéclicker
-// @author       Zhen
-// @match        https://www.pokeclicker.com/
-// @icon         https://www.google.com/s2/favicons?domain=pokeclicker.com
-// @grant        none
-// ==/UserScript==
-
 import waitForLoad from './modules/wait-for-load';
 import noCatchDelay from './modules/no-catch-delay';
 import autoBattle from './modules/auto-battle';
@@ -22,8 +11,12 @@ waitForLoad().then(() => {
   autoMine();
 
   setTimeout(() => {
-    document.querySelector('#pokemonListContainer .card-header:not(.collapsed)')?.click();
-    document.querySelector('#breedingDisplay .card-header:not(.collapsed)')?.click();
+    [
+      '#pokemonListContainer .card-header:not(.collapsed)',
+      '#breedingDisplay .card-header:not(.collapsed)',
+    ].forEach((selector) => {
+      document.querySelector<HTMLElement>(selector)?.click();
+    });
 
     App.game.oakItems.itemList[0].bonusList[5] = 100; // Magic Ball
     App.game.oakItems.itemList[4].bonusList[5] = 10000; // Sprayduck
