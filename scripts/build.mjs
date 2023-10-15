@@ -10,7 +10,7 @@ const generateBanner = (meta) => {
       const item = meta[key];
       if (item) {
         if (typeof item === 'string') {
-          banner.push(`// @${key.padEnd(11)} ${item}`);
+          banner.push(`// @${key.padEnd(10)} ${item}`);
         } else if (Array.isArray(item)) {
           item.forEach((value) => {
             banner.push(`// @${key.padEnd(11)} ${value}`);
