@@ -10,8 +10,8 @@ enum StatusClass {
 const AUTO_STATUS = {
   timer: 0,
   enable: 1,
-  notShinyFirst: 1,
-  sortKey: 8, // 4 for shiny, 8 for Times Hatched
+  notShinyFirst: 0,
+  sortKey: 9, // 4 for shiny, 9 for Times Hatched
   sortOrder: SortOrder.ASC,
 };
 
@@ -28,28 +28,41 @@ function hatchEgg() {
 // Object.entries(SortOptionConfigs).find(([_, { text }]) => /shiny/i.test(text));
 
 function addToHatchery() {
+  let caughtPokemon;
+  let caughtPokemonNotShiny;
+  let loop = 0;
+
   while (
+    loop <= 4 &&
     App.game.breeding.queueList().length < 4 &&
     App.game.breeding.canBreedPokemon() &&
     App.game.party.hasMaxLevelPokemon()
   ) {
-    const caughtPokemon = [...App.game.party.caughtPokemon];
     let canBreedPokemon;
 
+    if (!caughtPokemon) {
+      caughtPokemon = [...App.game.party.caughtPokemon];
+      caughtPokemon = caughtPokemon.sort(PartyController.compareBy(AUTO_STATUS.sortKey, Boolean(AUTO_STATUS.sortOrder)));
+    }
+
     if (AUTO_STATUS.notShinyFirst) {
-      canBreedPokemon = caughtPokemon.sort(PartyController.compareBy(4, Boolean(SortOrder.ASC)))
-        .find((partyPokemon) => !partyPokemon.shiny && partyPokemon.level === 100 && !partyPokemon.breeding);
+      if (!caughtPokemonNotShiny) {
+        caughtPokemonNotShiny = caughtPokemon.sort(PartyController.compareBy(4, Boolean(SortOrder.ASC)));
+      }
+      canBreedPokemon = caughtPokemonNotShiny.find((partyPokemon) => !partyPokemon.shiny && partyPokemon.level === 100 && !partyPokemon.breeding);
     }
 
     if (!canBreedPokemon) {
-      canBreedPokemon = caughtPokemon.sort(PartyController.compareBy(AUTO_STATUS.sortKey, Boolean(AUTO_STATUS.sortOrder)))
-        .find((partyPokemon) => partyPokemon.level === 100 && !partyPokemon.breeding);
+      canBreedPokemon = caughtPokemon.find((partyPokemon) => partyPokemon.level === 100 && !partyPokemon.breeding);
     }
 
     if (canBreedPokemon) {
       App.game.breeding.addPokemonToHatchery(canBreedPokemon);
     }
+
+    loop += 1;
   }
+  caughtPokemon = null;
 }
 
 function clearTimer() {
@@ -66,7 +79,7 @@ function autoHatch() {
       hatchEgg();
       addToHatchery();
     } catch(ex) {}
-    AUTO_STATUS.timer = setTimeout(autoHatch, 1500);
+    AUTO_STATUS.timer = setTimeout(autoHatch, 3000);
   }
 }
 

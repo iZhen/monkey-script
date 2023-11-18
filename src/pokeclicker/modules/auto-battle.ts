@@ -20,5 +20,5 @@ function battleLogic() {
 }
 
 export default function autoBattle() {
-  timer = setInterval(battleLogic, 10);
+  timer = setInterval(battleLogic, 800);
 }

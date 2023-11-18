@@ -42,4 +42,5 @@ declare global {
   const DungeonBattle: any;
   const Battle: any;
   const GymBattle: any;
+  const SafariBattle: any;
 }
