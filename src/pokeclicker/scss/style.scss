@@ -55,35 +55,39 @@ body {
 }
 
 //=== currency content ===========================
-#battleContainer {
-  & > .card-header {
+#currencyContainer {
+  margin-bottom: 0 !important;
+
+  & > .card-header { display: none;}
+  & > #currencyBody {
     position: fixed;
     left: 50%;
     top: 0;
     transform: translateX(-50%);
     z-index: 2;
     width: 900px;
+    padding: 0 !important;
     border: 0;
 
-    tbody, tr, td, td > span {
+    .currency-wrapper {
       display: flex !important;
       flex-wrap: nowrap;
       align-items: center;
       // flex: 1;
     }
 
-    tr, td {
-      margin: 0;
-      padding: 0;
+    .currency-line {
+      flex: 1;
     }
 
-    td > span {
-      width: 120px;
+    .currency-display {
+      // width: 120px;
+      margin: 0 !important;
       padding: 0 10px;
-      font-size: 12px;
+      // font-size: 12px;
 
-      img { height: 18px; margin-right: 3px;}
-      span { line-height: $status-bar-height; }
+      // img { height: 18px; margin-right: 3px;}
+      // div { line-height: $status-bar-height; }
     }
   }
 }
