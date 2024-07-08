@@ -34,11 +34,20 @@ declare global {
   const Mine: any;
   const OakItemType: Record<string, number>;
   const PartyController: any;
-  const SortOptionConfigs: Record<number, {
-    text: string;
-  }>;
+  const SortOptionConfigs: Record<
+    number,
+    {
+      text: string;
+    }
+  >;
   const GameConstants: any;
+  const FarmHands: {
+    list: any[];
+  };
   const DungeonRunner: any;
+  const DungeonGuides: {
+    list: any[];
+  };
   const DungeonBattle: any;
   const Battle: any;
   const GymBattle: any;

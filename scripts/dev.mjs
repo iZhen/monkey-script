@@ -1,5 +1,5 @@
-import { build, serve } from 'esbuild';
-import config from './esbuild.config.mjs';
+import { build } from "esbuild";
+import config from "./esbuild.config.mjs";
 
 const result = await build({
   ...config,

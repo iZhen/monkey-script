@@ -1,15 +1,24 @@
-import { build } from 'esbuild';
-import chalk from 'chalk';
-import config from './esbuild.config.mjs';
+import chalk from "chalk";
+import { build } from "esbuild";
+import config from "./esbuild.config.mjs";
 
-const banner_keys_order = ['name', 'namespace', 'version', 'description', 'author', 'match', 'icon', 'grant'];
+const banner_keys_order = [
+  "name",
+  "namespace",
+  "version",
+  "description",
+  "author",
+  "match",
+  "icon",
+  "grant",
+];
 const generateBanner = (meta) => {
   if (meta) {
     const banner = [];
     banner_keys_order.forEach((key) => {
       const item = meta[key];
       if (item) {
-        if (typeof item === 'string') {
+        if (typeof item === "string") {
           banner.push(`// @${key.padEnd(10)} ${item}`);
         } else if (Array.isArray(item)) {
           item.forEach((value) => {
@@ -20,37 +29,30 @@ const generateBanner = (meta) => {
     });
 
     if (banner.length) {
-      banner.unshift('// ==UserScript==');
-      banner.push('// ==/UserScript==');
-      return banner.join('\n');
+      banner.unshift("// ==UserScript==");
+      banner.push("// ==/UserScript==");
+      return banner.join("\n");
     }
   }
-  return '';
+  return "";
 };
 
-config.forEach(async ({
-  module,
-  entry,
-  outfile,
-  meta,
-}) => {
+config.forEach(async ({ module, entry, outfile, meta }) => {
   const buildResult = await build({
     entryPoints: [`src/${entry}`],
     outfile,
     bundle: true,
-    platform: 'browser',
-    target: 'es6',
+    platform: "browser",
+    target: "es6",
     treeShaking: true,
     minify: false,
-    legalComments: 'none',
+    legalComments: "none",
     banner: {
       js: generateBanner(meta),
     },
   });
 
   if (buildResult.errors.length === 0) {
-    console.log(`[${chalk.yellow('script')}] ${outfile}`);
+    console.log(`[${chalk.yellow("script")}] ${outfile}`);
   }
 });
-
-

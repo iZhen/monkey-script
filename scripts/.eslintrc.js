@@ -5,6 +5,6 @@ module.exports = {
   },
   rules: {
     "no-console": ["error", { allow: ["log"] }],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
   },
 };

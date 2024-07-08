@@ -1,11 +1,14 @@
-const namespace = 'auto-hatchery';
+const namespace = "auto-hatchery";
 
-enum SortOrder { ASC, DESC };
+enum SortOrder {
+  ASC,
+  DESC,
+}
 
 enum StatusClass {
-  Enable = 'btn-success',
-  Disable = 'btn-danger',
-};
+  Enable = "btn-success",
+  Disable = "btn-danger",
+}
 
 const AUTO_STATUS = {
   timer: 0,
@@ -42,18 +45,32 @@ function addToHatchery() {
 
     if (!caughtPokemon) {
       caughtPokemon = [...App.game.party.caughtPokemon];
-      caughtPokemon = caughtPokemon.sort(PartyController.compareBy(AUTO_STATUS.sortKey, Boolean(AUTO_STATUS.sortOrder)));
+      caughtPokemon = caughtPokemon.sort(
+        PartyController.compareBy(
+          AUTO_STATUS.sortKey,
+          Boolean(AUTO_STATUS.sortOrder)
+        )
+      );
     }
 
     if (AUTO_STATUS.notShinyFirst) {
       if (!caughtPokemonNotShiny) {
-        caughtPokemonNotShiny = caughtPokemon.sort(PartyController.compareBy(4, Boolean(SortOrder.ASC)));
+        caughtPokemonNotShiny = caughtPokemon.sort(
+          PartyController.compareBy(4, Boolean(SortOrder.ASC))
+        );
       }
-      canBreedPokemon = caughtPokemonNotShiny.find((partyPokemon) => !partyPokemon.shiny && partyPokemon.level === 100 && !partyPokemon.breeding);
+      canBreedPokemon = caughtPokemonNotShiny.find(
+        (partyPokemon) =>
+          !partyPokemon.shiny &&
+          partyPokemon.level === 100 &&
+          !partyPokemon.breeding
+      );
     }
 
     if (!canBreedPokemon) {
-      canBreedPokemon = caughtPokemon.find((partyPokemon) => partyPokemon.level === 100 && !partyPokemon.breeding);
+      canBreedPokemon = caughtPokemon.find(
+        (partyPokemon) => partyPokemon.level === 100 && !partyPokemon.breeding
+      );
     }
 
     if (canBreedPokemon) {
@@ -78,7 +95,7 @@ function autoHatch() {
     try {
       hatchEgg();
       addToHatchery();
-    } catch(ex) {}
+    } catch (ex) {}
     AUTO_STATUS.timer = setTimeout(autoHatch, 3000);
   }
 }
@@ -87,16 +104,16 @@ function renderControl() {
   let ctrl = document.getElementById(namespace);
 
   if (!ctrl) {
-    const breedingModal = document.querySelector('#breedingModal');
+    const breedingModal = document.querySelector("#breedingModal");
     if (breedingModal) {
       const items = [];
       items.push(
         `<a class="dropdown-item active" data-key="notShinyFirst" data-value="${AUTO_STATUS.notShinyFirst}">Not Shiny First</a>`,
         `<div class="dropdown-divider"></div>`,
-        `<h6 class="dropdown-header">Sort Type</h6>`,
+        `<h6 class="dropdown-header">Sort Type</h6>`
       );
       Object.entries(SortOptionConfigs || []).forEach(([key, { text }]) => {
-        const active = Number(key) === AUTO_STATUS.sortKey ? 'active' : '';
+        const active = Number(key) === AUTO_STATUS.sortKey ? "active" : "";
         items.push(
           `<a class="dropdown-item ${active}" data-key="sortKey" data-value="${key}">${text}</a>`
         );
@@ -105,23 +122,23 @@ function renderControl() {
         `<div class="dropdown-divider"></div>`,
         `<h6 class="dropdown-header">Sort Order</h6>`,
         `<a class="dropdown-item active" data-key="sortOrder" data-value="${SortOrder.ASC}">ASC</a>`,
-        `<a class="dropdown-item" data-key="sortOrder" data-value="${SortOrder.DESC}">DESC</a>`,
+        `<a class="dropdown-item" data-key="sortOrder" data-value="${SortOrder.DESC}">DESC</a>`
       );
 
-      ctrl = document.createElement('div');
+      ctrl = document.createElement("div");
       ctrl.id = namespace;
-      ctrl.classList.add('btn-group');
-      ctrl.style.marginLeft = '25px';
+      ctrl.classList.add("btn-group");
+      ctrl.style.marginLeft = "25px";
       ctrl.innerHTML = [
         `<button type="button" class="btn ${StatusClass.Enable} btn-switch">auto</button>`,
         `<button type="button" class="btn ${StatusClass.Enable} dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>`,
-        `<div class="dropdown-menu">${items.join('')}</div>`,
-      ].join('');
+        `<div class="dropdown-menu">${items.join("")}</div>`,
+      ].join("");
 
-      ctrl.addEventListener('click', (e) => {
+      ctrl.addEventListener("click", (e) => {
         const el = e.target;
         if (el instanceof HTMLElement) {
-          if (el.matches('.btn-switch')) {
+          if (el.matches(".btn-switch")) {
             el.classList.toggle(StatusClass.Enable);
             el.classList.toggle(StatusClass.Disable);
 
@@ -134,19 +151,25 @@ function renderControl() {
             if (AUTO_STATUS.enable) {
               autoHatch();
             }
-          } else if (el.matches('.dropdown-item:not(.active)')) {
+          } else if (el.matches(".dropdown-item:not(.active)")) {
             const key = el.dataset.key as keyof typeof AUTO_STATUS;
-            const value = Number(el.dataset.value) as typeof AUTO_STATUS[keyof typeof AUTO_STATUS];
+            const value = Number(
+              el.dataset.value
+            ) as (typeof AUTO_STATUS)[keyof typeof AUTO_STATUS];
             if (key) {
               AUTO_STATUS[key] = value;
-              ctrl?.querySelector(`.dropdown-item.active[data-key="${key}"]`)?.classList.remove('active');
-              el.classList.add('active');
+              ctrl
+                ?.querySelector(`.dropdown-item.active[data-key="${key}"]`)
+                ?.classList.remove("active");
+              el.classList.add("active");
             }
           }
         }
       });
 
-      breedingModal.querySelector('.modal-header .float-left')?.appendChild(ctrl);
+      breedingModal
+        .querySelector(".modal-header .float-left")
+        ?.appendChild(ctrl);
     }
   }
 }

@@ -1,11 +1,14 @@
 let timer = 0;
 
 function battleLogic() {
-  if (App.game.gameState === GameConstants.GameState.fighting) { // in normal fight
+  if (App.game.gameState === GameConstants.GameState.fighting) {
+    // in normal fight
     Battle.clickAttack();
-  } else if (App.game.gameState === GameConstants.GameState.gym) { // in gym
+  } else if (App.game.gameState === GameConstants.GameState.gym) {
+    // in gym
     GymBattle.clickAttack();
-  } else if (App.game.gameState === GameConstants.GameState.dungeon) { // in dungeon
+  } else if (App.game.gameState === GameConstants.GameState.dungeon) {
+    // in dungeon
     if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
       DungeonBattle.clickAttack();
     } else {

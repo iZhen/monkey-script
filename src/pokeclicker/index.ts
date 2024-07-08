@@ -1,32 +1,17 @@
-import waitForLoad from './modules/wait-for-load';
-import noCatchDelay from './modules/no-catch-delay';
-import oakPowerUp from './modules/oak-power-up';
-import autoBattle from './modules/auto-battle';
-import autoHatchery from './modules/auto-hatchery';
-import autoMine from './modules/auto-mine';
+import dungeonHelper from "./modules/dungeon-helper";
+import farmHelper from "./modules/farm-helper";
+import hatcheryHelper from "./modules/hatchery-helper";
+import noCatchDelay from "./modules/no-catch-delay";
+import oakPowerUp from "./modules/oak-power-up";
+import waitForLoad from "./modules/wait-for-load";
 
-waitForLoad().then(() => {
-  noCatchDelay();
-  oakPowerUp();
-  // autoBattle();
-  // autoHatchery();
-  // autoMine();
-
-  // Hatchery Helpers only cost 1
-  App.game.breeding.hatcheryHelpers.available().forEach((hatcheryHelper: any) => {
-    if (hatcheryHelper.cost) {
-      hatcheryHelper.cost.amount = 1;
-      hatcheryHelper.cost.currency = 0;
-    }
-  });
-
-  // dungeon show all tiles
-  DungeonRunner?.dungeonFinished.subscribe((dungeonFinished: any) => {
-    if (dungeonFinished === false) {
-      DungeonRunner.map.showAllTiles();
-    }
-  });
-
+waitForLoad([
+  noCatchDelay,
+  oakPowerUp,
+  farmHelper,
+  dungeonHelper,
+  hatcheryHelper,
+]).then(() => {
   // set Safari Battle speed to Zero
   if (SafariBattle?.Speed) {
     for (let i in SafariBattle.Speed) {
