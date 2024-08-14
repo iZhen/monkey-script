@@ -2,7 +2,7 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import { globby } from "globby";
 import { parse, resolve } from "path";
-import sass from "sass";
+import * as sass from "sass";
 
 const rootDir = process.cwd();
 const srcDir = resolve(process.cwd(), "src");
