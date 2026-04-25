@@ -1,9 +1,10 @@
-@import './variables.scss';
-@import './reset.scss';
+@import "./variables.scss";
+@import "./reset.scss";
 
 // styles
 
-html, body {
+html,
+body {
   font-family: $base-font-family !important;
   font-size: $base-font-size !important;
 }
@@ -13,7 +14,7 @@ body {
   background: $background-color !important;
 
   &::after {
-    content: '';
+    content: "";
     position: fixed;
     top: 0;
     right: 0;
@@ -21,7 +22,7 @@ body {
     z-index: 1;
     width: 100%;
     height: $status-bar-height;
-    background-color: $status-bar-background ;
+    background-color: $status-bar-background;
   }
 }
 
@@ -38,7 +39,8 @@ body {
   .pageItemTitle {
     font-size: 1.3rem !important;
 
-    .right, .left {
+    .right,
+    .left {
       top: 2px;
       font-size: $base-font-size;
     }
@@ -58,7 +60,9 @@ body {
 #currencyContainer {
   margin-bottom: 0 !important;
 
-  & > .card-header { display: none;}
+  & > .card-header {
+    display: none;
+  }
   & > #currencyBody {
     position: fixed;
     left: 50%;
@@ -69,28 +73,33 @@ body {
     padding: 0 !important;
     border: 0;
 
-    .currency-wrapper {
+    & > .currency-wrapper {
       display: flex !important;
       flex-wrap: nowrap;
       align-items: center;
       // flex: 1;
-    }
 
-    .currency-line {
-      flex: 1;
-    }
+      & > div {
+        flex: 1;
 
-    .currency-display {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      // width: 120px;
-      margin: 0 !important;
-      padding: 0 10px;
-      font-size: 12px;
+        & > div {
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center;
+          // width: 120px;
+          margin: 0 !important;
+          padding: 0 10px;
+          font-size: 12px;
 
-      img { height: 18px; margin-right: 3px;}
-      div { line-height: 1; }
+          & > img {
+            height: 18px;
+            margin-right: 3px;
+          }
+          & > div {
+            line-height: 1;
+          }
+        }
+      }
     }
   }
 }
@@ -102,14 +111,21 @@ body {
   right: 0 !important;
   position: fixed !important;
 
-  .btn, a { font-size: 12px !important; }
+  .btn,
+  a {
+    font-size: 12px !important;
+  }
   .btn {
     padding: 0 10px;
     line-height: $status-bar-height;
 
-    &:after { display: none; }
+    &:after {
+      display: none;
+    }
   }
-  a { line-height: 1.5; }
+  a {
+    line-height: 1.5;
+  }
 }
 
 //=== item ===========================
