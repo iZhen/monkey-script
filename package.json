@@ -1,29 +1,24 @@
 {
   "name": "monkey-script",
-  "repository": "git@github.com:iZhen/monkey-script.git",
-  "author": "Zhen <i@thezhen.me>",
-  "private": true,
   "type": "module",
+  "private": true,
+  "author": "Zhen <i@thezhen.me>",
+  "repository": "git@github.com:iZhen/monkey-script.git",
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "scripts": {
-    "dev": "NODE_ENV=development node scripts/dev.mjs",
-    "build": "rm -rf dist && node scripts/build.mjs && node scripts/style.mjs",
-    "style": "node scripts/style.mjs"
-  },
-  "dependencies": {
-    "svelte": "^4.2.18"
+    "build": "node scripts/build",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.1.0",
-    "@typescript-eslint/parser": "^8.1.0",
-    "chalk": "^5.3.0",
-    "esbuild": "^0.23.1",
-    "eslint": "^9.9.0",
-    "fs-extra": "^11.2.0",
-    "globby": "^14.0.2",
-    "sass": "^1.77.8",
-    "typescript": "^5.5.4"
+    "@antfu/eslint-config": "^9.0.0",
+    "@types/node": "^25.8.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-format": "^2.0.1",
+    "sass-embedded": "^1.99.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.12"
   }
 }

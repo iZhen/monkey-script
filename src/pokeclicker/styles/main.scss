@@ -1,28 +1,29 @@
-@import "./variables.scss";
-@import "./reset.scss";
+@use 'variables' as v;
+
+@forward 'reset';
 
 // styles
 
 html,
 body {
-  font-family: $base-font-family !important;
-  font-size: $base-font-size !important;
+  font-family: v.$base-font-family !important;
+  font-size: v.$base-font-size !important;
 }
 
 body {
-  padding: $status-bar-height + 10px 0 0;
-  background: $background-color !important;
+  padding: v.$status-bar-height + 10px 0 0;
+  background: v.$background-color !important;
 
   &::after {
-    content: "";
+    content: '';
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     z-index: 1;
     width: 100%;
-    height: $status-bar-height;
-    background-color: $status-bar-background;
+    height: v.$status-bar-height;
+    background-color: v.$status-bar-background;
   }
 }
 
@@ -42,7 +43,7 @@ body {
     .right,
     .left {
       top: 2px;
-      font-size: $base-font-size;
+      font-size: v.$base-font-size;
     }
     .pokeball-smallest {
       width: 14px;
@@ -117,7 +118,7 @@ body {
   }
   .btn {
     padding: 0 10px;
-    line-height: $status-bar-height;
+    line-height: v.$status-bar-height;
 
     &:after {
       display: none;

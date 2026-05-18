@@ -1,7 +1,28 @@
+/**
+ * oak items power up (10x)
+ */
 export default function oakItemsPowerUp() {
-  // oak items power up
-  App.game.oakItems.itemList[0].bonusList[5] = 100; // Magic Ball
-  App.game.oakItems.itemList[4].bonusList[5] = 1000; // Sprayduck
-  App.game.oakItems.itemList[5].bonusList[5] = 10; // Shiny Charm
-  App.game.oakItems.itemList[6].bonusList[5] = 100; // Blaze Cassette
+  // enum OakItemType {
+  //     'Magic_Ball' = 0,
+  //     'Amulet_Coin',
+  //     'Rocky_Helmet',
+  //     'Exp_Share',
+  //     'Sprayduck',
+  //     'Shiny_Charm',
+  //     'Magma_Stone',
+  //     'Cell_Battery',
+  //     'Squirtbottle',
+  //     'Sprinklotad',
+  //     'Explosive_Charge',
+  //     'Treasure_Scanner',
+  // }
+  if (Array.isArray(App.game.oakItems.itemList)) {
+    App.game.oakItems.itemList.forEach((item: any) => {
+      if (Array.isArray(item.bonusList)) {
+        item.bonusList.forEach((bonus: number, index: number, array: number[]) => {
+          array[index] = bonus * 10;
+        });
+      }
+    });
+  }
 }

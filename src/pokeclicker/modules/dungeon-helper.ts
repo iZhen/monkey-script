@@ -1,8 +1,12 @@
+/**
+ * Dungeon Guides only cost 1 Pokédollars, and speed up (100ms)
+ * and show all tiles
+ * Movement Speed 0.1s
+ */
 export default function dungeonHelper() {
-  // Dungeon Guides only cost 1, and speed up
   DungeonGuides.list.forEach((dungeonGuide: any) => {
     if (dungeonGuide.cost) {
-      dungeonGuide.cost = [[1, 0]];
+      dungeonGuide.cost = [[1, GameConstants.Currency.money]];
     }
     if (dungeonGuide.fixedCost) {
       dungeonGuide.fixedCost = [];

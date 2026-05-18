@@ -32,7 +32,7 @@ declare global {
     };
   };
   const Mine: any;
-  const OakItemType: Record<string, number>;
+  const OakItemType: Record<string, string | number>;
   const PartyController: any;
   const SortOptionConfigs: Record<
     number,
