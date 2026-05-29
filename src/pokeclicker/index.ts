@@ -15,9 +15,9 @@ import './styles/main.scss';
 
 waitForLoad([
   noCatchDelay,
-  oakPowerUp,
-  farmHelper,
+  // oakPowerUp,
+  // farmHelper,
   dungeonHelper,
-  hatcheryHelper,
-  SafariHelper,
+  // hatcheryHelper,
+  // SafariHelper,
 ]);

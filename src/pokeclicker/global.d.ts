@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export {};
 
 declare global {
@@ -41,15 +40,13 @@ declare global {
     }
   >;
   const GameConstants: any;
-  const FarmHands: {
-    list: any[];
-  };
+  const HatcheryHelpers: any;
+  const FarmHands: any;
   const DungeonRunner: any;
-  const DungeonGuides: {
-    list: any[];
-  };
+  const DungeonGuides: any;
   const DungeonBattle: any;
   const Battle: any;
   const GymBattle: any;
   const SafariBattle: any;
+  const Rand: any;
 }

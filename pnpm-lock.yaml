@@ -15,7 +15,7 @@ importers:
         specifier: ^25.8.0
         version: 25.8.0
       eslint:
-        specifier: ^10.3.0
+        specifier: ^10.4.0
         version: 10.4.0
       eslint-plugin-format:
         specifier: ^2.0.1
@@ -27,7 +27,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       vite:
-        specifier: ^8.0.12
+        specifier: ^8.0.13
         version: 8.0.13(@types/node@25.8.0)(sass-embedded@1.99.0)(sass@1.99.0)(yaml@2.9.0)
 
 packages:

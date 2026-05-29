@@ -13,8 +13,8 @@ const banner = {
 build({
   build: {
     minify: false,
-    cssMinify: false,
-    cssCodeSplit: false,
+    cssMinify: true,
+    cssCodeSplit: true,
     lib: {
       name: 'pokeclicker',
       fileName: 'pokeclicker',
