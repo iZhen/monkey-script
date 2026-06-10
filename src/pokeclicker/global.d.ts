@@ -49,4 +49,5 @@ declare global {
   const GymBattle: any;
   const SafariBattle: any;
   const Rand: any;
+  const SeededRand: any;
 }

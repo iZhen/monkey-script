@@ -25,7 +25,11 @@ build({
       output: {
         format: 'iife',
         comments: false,
-        postBanner: ['// ==UserScript==', ...Object.keys(banner).map(key => `// @${key} ${banner[key]}`), '// ==/UserScript==\n'].join('\n'),
+        postBanner: [
+          '// ==UserScript==',
+          ...Object.keys(banner).map(key => `// @${key} ${banner[key]}`),
+          '// ==/UserScript==\n',
+        ].join('\n'),
       },
     },
   },
